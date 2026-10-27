@@ -2,6 +2,7 @@ import { validateRecord } from "./toolkit.js";
 import { normalizeRecord } from "./toolkit.js";
 import { filterRecords } from "./toolkit.js";
 import { searchRecords } from "./toolkit.js";
+import { sortRecords } from "./toolkit.js";
 
 // Assignment 3: verification harness. Run it with: node harness.js
 //
@@ -98,4 +99,30 @@ check(
 
 
 
-    
+    //Sort Records Tests//
+const sortBooks = [
+    { title: "Space Odyssey", minutes: 90 },
+    { title: "Robot Garden", minutes: 90 },
+    { title: "Art Basics", minutes: 30 }
+];
+
+const originalOrder = JSON.stringify(sortBooks);
+const sortedBooks = sortRecords(sortBooks, "minutes");
+
+check(
+    "sort by minutes",
+    [30, 90, 90],
+    sortedBooks.map(book => book.minutes)
+);
+
+check(
+    "sort equal minutes alaphabetically",
+    ["Art Basics", "Robot Garden", "Space Odyssey"],
+    sortedBooks.map(book => book.title)
+);
+
+check(
+    "sort does not change original",
+    originalOrder,
+    JSON.stringify(sortBooks)
+);  

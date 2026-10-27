@@ -75,3 +75,32 @@ export function searchRecords(records, query) {
         )
     );
 }
+
+//Sort Records//
+// Takes an array of book records and a property to sort by
+// Returns a new sorted array
+// Does not change the original array
+// Ties are broken alphabetically by title
+
+export function sortRecords(records, property) {
+    return [...records].sort((a, b) => {
+        const first = a[property];
+        const second = b[property];
+    if (typeof first === "number" && typeof second === "number") {
+        if (first !== second) {
+            return first - second;
+        }
+    } else {
+        const comparison = String(first ?? "").localeCompare(
+             String(second ?? "")
+        );
+        
+        if (comparison !== 0) {
+            return comparison;
+        }
+    }
+    return String(a.title ?? "").localeCompare
+    (String(b.title ?? "")
+    );
+});
+}
