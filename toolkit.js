@@ -51,3 +51,27 @@ export function normalizeRecord(record) {
     }
     return cleaned;
 }
+
+//Filter Records//
+// Takes an array of book records and a condition function.
+// Returns a new array containing only matching records.
+// Does not change the original array.
+
+export function filterRecords(records, condition) {
+  return records.filter(condition);
+}
+
+//Search Records//
+// Takes an array of book records and a search query.
+// Returns a new array of matching records.
+// Does not change the original array.
+
+export function searchRecords(records, query) {
+    const searchTerm = String(query).toLowerCase().trim();
+
+    return records.filter(record => 
+        ["title", "creator", "description"].some(field =>
+            String(record[field] ?? "").toLowerCase().includes(searchTerm)
+        )
+    );
+}

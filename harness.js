@@ -1,5 +1,7 @@
 import { validateRecord } from "./toolkit.js";
 import { normalizeRecord } from "./toolkit.js";
+import { filterRecords } from "./toolkit.js";
+import { searchRecords } from "./toolkit.js";
 
 // Assignment 3: verification harness. Run it with: node harness.js
 //
@@ -55,3 +57,45 @@ const originalRecord = {
      before,
      JSON.stringify(originalRecord)
  );
+
+ //Filter Records Tests//
+ const testBooks = [
+     { title: "Book A", category: "Art" },
+     { title: "Book B", category: "Study" },
+     { title: "book C", category: "Art" }
+ ];
+ const artBooks = filterRecords(
+    testBooks,
+    book => book.category === "Art"
+);
+check(
+    "filter records by category", 2, artBooks.length);
+
+//Search Records Tests//
+const searchBooks = [
+    { title: "Robot Garden", creator: "Mina Reed", description: "A robotics project" },
+    { title: "Space Odyssey", creator: "Alex Stone", description: "Exploring the stars" },
+    { title: "Art Basics", creator: "Jordan Lee", description: "Learning to paint" }
+];
+
+check(
+    "search ignores capitalization",
+    1,
+    searchRecords(searchBooks, "ROBOT").length
+);
+
+check(
+    "search matches creator",
+    1,
+    searchRecords(searchBooks, "alex").length
+);
+
+check(
+    "search matches description",
+    1,
+    searchRecords(searchBooks, "PAINT").length
+);
+
+
+
+    
