@@ -1,3 +1,6 @@
+import { validateRecord } from "./toolkit.js";
+import { normalizeRecord } from "./toolkit.js";
+
 // Assignment 3: verification harness. Run it with: node harness.js
 //
 // 1. Import your functions from "./toolkit.js" and load your scenario's dataset from data/.
@@ -9,3 +12,46 @@
 //    PASS  search ignores capitalization  expected: 1  actual: 1
 // 4. Work out each expected result from the data before you run the case.
 console.log("Starter ready. Implement the operations and your checks before claiming any pass.");
+
+
+function check(name, expected, actual) {
+    const result = JSON.stringify(actual) === JSON.stringify(expected)
+    ? "PASS" : "FAIL";
+
+   console.log(`${result}  ${name}  expected: ${JSON.stringify(expected)}  actual: ${JSON.stringify(actual)}`);
+} 
+
+//Validate Record Tests//
+check(
+    "missing title validation",
+     false,
+    validateRecord({ minutes: 120 }).valid   
+);
+
+check(
+    "invalid minutes validation",
+    false,
+    validateRecord({
+        title: "Robot Garden",
+        minutes: "thirty" 
+    }).valid
+);
+//Normalize Record Tests//
+check(
+    "normalize removes extra spaces",
+    "Robot Garden",
+    normalizeRecord({ title: "  Robot Garden  " }).title
+);
+const originalRecord = {
+     title: "  Robot Garden  ",
+     creator: "  Mina Reed  "
+ };
+ const before = JSON.stringify(originalRecord);
+
+ normalizeRecord(originalRecord);
+
+ check(
+     "normalize does not change original",
+     before,
+     JSON.stringify(originalRecord)
+ );
