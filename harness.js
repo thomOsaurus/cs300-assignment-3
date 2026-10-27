@@ -3,6 +3,7 @@ import { normalizeRecord } from "./toolkit.js";
 import { filterRecords } from "./toolkit.js";
 import { searchRecords } from "./toolkit.js";
 import { sortRecords } from "./toolkit.js";
+import { summarizeRecords } from "./toolkit.js";
 
 // Assignment 3: verification harness. Run it with: node harness.js
 //
@@ -126,3 +127,36 @@ check(
     originalOrder,
     JSON.stringify(sortBooks)
 );  
+
+//Summarize Records Tests//
+const summarizeBooks = [
+    { title: "Art Basics", minutes: 30 },
+    { title: "Robot Garden", minutes: 90 },
+    { title: "Space Odyssey", minutes: 150 }
+];
+
+const summary = summarizeRecords(summarizeBooks);
+
+check(
+    "summarize count",
+    3,
+    summary.count
+);
+
+check(
+    "summary calculates total minutes",
+    270,
+    summary.totalMinutes
+);
+
+check(
+    "summary calculates average minutes",
+    90,
+    summary.averageMinutes
+);
+
+check(
+    "summary handles empty array",
+    { count: 0, totalMinutes: 0, averageMinutes: 0 },
+    summarizeRecords([]) 
+);

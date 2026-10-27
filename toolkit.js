@@ -104,3 +104,24 @@ export function sortRecords(records, property) {
     );
 });
 }
+
+//Summarize Records//
+// Takes an array of book records
+// Returns the count, total minutes, and average minutes
+// Does not change the original array
+
+export function summarizeRecords(records) {
+    const count = records.length;
+
+    const totalMinutes = records.reduce(
+        (total, record) => total + record.minutes,
+        0
+    );
+    const averageMinutes = count === 0 ? 0 :totalMinutes / count;
+
+    return {
+        count: count,       
+        totalMinutes,
+        averageMinutes
+    };
+}
