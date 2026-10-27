@@ -125,3 +125,17 @@ export function summarizeRecords(records) {
         averageMinutes
     };
 }
+
+//Build Report//
+// Combines the book records into a report
+// Uses the existing toolkit functions
+// Does not change the original array
+
+export function buildReport(records, query) {
+    const matches = searchRecords(records, query);
+    const summary = summarizeRecords(matches);
+    return {
+      matches,
+      summary  
+    };
+} 

@@ -4,6 +4,7 @@ import { filterRecords } from "./toolkit.js";
 import { searchRecords } from "./toolkit.js";
 import { sortRecords } from "./toolkit.js";
 import { summarizeRecords } from "./toolkit.js";
+import { buildReport } from "./toolkit.js";
 
 // Assignment 3: verification harness. Run it with: node harness.js
 //
@@ -159,4 +160,31 @@ check(
     "summary handles empty array",
     { count: 0, totalMinutes: 0, averageMinutes: 0 },
     summarizeRecords([]) 
+);
+
+//Build Report Tests//
+const reportBooks = [
+    { title: "Robot Garden", creator: "Mina Reed", minutes: 90},
+    { title: "Space Odyssey", creator: "Alex Stone", minutes: 150},
+    { title: "Art Basics", creator: "Mina Reed", minutes: 30}
+    
+];
+
+const report = buildReport(reportBooks, "Mina");
+
+check(
+    "report finds matching books",
+    2,
+    report.matches.length
+);
+check(
+    "report summarizes total minutes",
+    120,
+    report.summary.totalMinutes
+);
+check(
+    "report calcualates average minutes",
+    60,
+    report.summary.averageMinutes
+
 );
