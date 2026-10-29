@@ -25,8 +25,8 @@ export function validateRecord(record) {
   if (typeof record.title !== 'string' || record.title.trim() === '') {
     errors.push('title is missing');
   }
-   if (typeof record.minutes !== 'number') {
-    errors.push('minutes must be a number');
+   if (typeof record.minutes !== 'number' || !Number.isFinite(record.minutes) || record.minutes < 0) {
+    errors.push('minutes must be a valid, non-negative number');
 }
  return {
     valid: errors.length === 0,

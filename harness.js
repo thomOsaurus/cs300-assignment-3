@@ -41,6 +41,24 @@ check(
         minutes: "thirty" 
     }).valid
 );
+
+check (
+    "negative minutes validation",
+    false,
+    validateRecord({
+        title: "Robot Garden",
+        minutes: -30
+    }).valid
+);
+
+check(
+    "NaN minutes validation",
+    false,
+    validateRecord({
+        title: "Robot Garden",
+        minutes: NaN
+    }).valid
+);
 //Normalize Record Tests//
 check(
     "normalize removes extra spaces",
